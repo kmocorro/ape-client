@@ -42,7 +42,7 @@ export default function Index() {
     headers.append('Content-Type', 'application/json');
     //headers.append('Authorization', '123456789');
     console.log('logging in..')
-    let response = await fetch('http://localhost:8080/api/login', {
+    let response = await fetch('http://meswebspf409.sunpowercorp.com:8080/api/login', {
       headers: headers,
       method: 'POST',
       body: JSON.stringify({

@@ -22,7 +22,7 @@ export default function Index() {
   
   const token = cookies.get('token')
   const fetch_employee = url => fetch(url, {headers: { 'Content-Type': 'application/json', 'Authorization': token}, method: 'POST'}).then(r => r.json())
-  const { data, error } = useSWR('http://localhost:8080/api/employee', fetch_employee)
+  const { data, error } = useSWR('http://meswebspf409.sunpowercorp.com:8080/api/employee', fetch_employee)
   console.log(data);
 
   const handleLogin = () => {
@@ -40,7 +40,7 @@ export default function Index() {
     cohen();
 
     async function cohen(){
-      let response = await fetch('http://localhost:8080/api/iscohen', {
+      let response = await fetch('http://meswebspf409.sunpowercorp.com:8080/api/iscohen', {
         headers: { 'Content-Type': 'application/json', 'Authorization': token},
         method: 'POST'
       })
@@ -110,7 +110,7 @@ export default function Index() {
     headers.append('Content-Type', 'application/json');
     //headers.append('Authorization', isToken);
 
-    let response = await fetch('http://localhost:8080/api/cohen', {
+    let response = await fetch('http://meswebspf409.sunpowercorp.com:8080/api/cohen', {
       headers: headers,
       method: 'POST',
       body: JSON.stringify({
