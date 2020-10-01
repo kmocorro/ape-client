@@ -156,29 +156,23 @@ export default function Index() {
     setOpenSnackbarCohen(false);
   }
 
-  if (error) return (
-    <div>
-      <>
-      <Typography variant="h6" component="h1" gutterBottom>
-        Please Login.
-      </Typography>
-      <Button onClick={handleLogin} variant="outlined">
-        Login
-      </Button>
-      </>
-    </div>
-  )
-  if (!data) return <div>loading...</div>
+  const [ countComplete, setCountComplete ] = useState(0);
 
-  const countComplete = data.flow.reduce(function(n, flow){
-    return n + (flow.status === 1);
-  }, 0)
+  useEffect(() => {
+    if(typeof data !== 'undefined'){
+      setCountComplete(data.flow.reduce(function(n, flow){
+        return n + (flow.status === 1);
+      }, 0))
+    } else {
+      setCountComplete(0) 
+    }
+  }, [data])
 
   return (
     <Container maxWidth="sm">
       <Box my={4}>
         {
-          !token ? (
+          !token || error ? (
             <>
             <Typography variant="h4" component="h1" gutterBottom>
               Please Login.
@@ -188,230 +182,234 @@ export default function Index() {
             </Button>
             </>
           ):(
-            <Fragment>
-              <Typography variant="h3" component="h6" style={{fontWeight: 'bold'}} gutterBottom>
-                maxeon ape +
-              </Typography>
-              <Typography variant="h6" style={{fontWeight: 'bold'}} color="primary" >
-                {data.profile.displayName} / {data.profile.employeeNumber}
-              </Typography>
-              <Typography variant="body2" color="textPrimary">
-                {data.profile.title}
-              </Typography>
-              <Typography variant="body2" color="textSecondary">
-                {data.profile.department}
-              </Typography>
-              <Button size="small" onClick={handleLogout} variant="text">
-                logout
-              </Button>
-              <Typography variant="body1" style={{marginTop:24, marginBottom:24}} gutterBottom>
-                {countComplete}/{data.flow.length} quests complete
-              </Typography>
-              {
-                data.flow.length > 0 ? (
-                  data.flow.map(data => (
-                    data.flow_id === "1" ? (
-                      data.status === 0 ? (
-                        <Cohen
-                          b1={b1}
-                          b2={b2}
-                          b3={b3}
-                          b6={b6}
-                          b9={b9}
-                          b10={b10}
-                          b4={b4}
-                          b5={b5}
-                          b7={b7}
-                          b8={b8}
-                          a1={a1}
-                          a2={a2}
-                          a3={a3}
-                          a4={a4}
-                          a5={a5}
-                          a6={a6}
-                          a7={a7}
-                          d1={d1}
-                          d2={d2}
-                          d3={d3}
-                          d4={d4}
-                          d5={d5}
-                          d6={d6}
-                          d7={d7}
-                          isSubmitCohen={isSubmitCohen}
-                          handleSubmitCohen={handleSubmitCohen}
-                        />
-                      ):(
-                        <div style={{display: 'flex'}}>
-                        <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Cohen / HADS Form</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
-                        </div>
-                      )
-                    ):(
-                      data.flow_id === "2" ? (
+            !data ? (
+              <Typography>Loading...</Typography>
+            ):(
+              <Fragment>
+                <Typography variant="h3" component="h6" style={{fontWeight: 'bold'}} gutterBottom>
+                  maxeon ape +
+                </Typography>
+                <Typography variant="h6" style={{fontWeight: 'bold'}} color="primary" >
+                  {data.profile.displayName} / {data.profile.employeeNumber}
+                </Typography>
+                <Typography variant="body2" color="textPrimary">
+                  {data.profile.title}
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  {data.profile.department}
+                </Typography>
+                <Button size="small" onClick={handleLogout} variant="text">
+                  logout
+                </Button>
+                <Typography variant="body1" style={{marginTop:24, marginBottom:24}} gutterBottom>
+                  {countComplete}/{data.flow.length} quests complete
+                </Typography>
+                {
+                  data.flow.length > 0 ? (
+                    data.flow.map(data => (
+                      data.flow_id === "1" ? (
                         data.status === 0 ? (
-                          <Grid>
-                            <Grid item>
-                              <Typography variant="h6">Blood Extraction</Typography>
-                            </Grid>
-                          </Grid>
+                          <Cohen
+                            b1={b1}
+                            b2={b2}
+                            b3={b3}
+                            b6={b6}
+                            b9={b9}
+                            b10={b10}
+                            b4={b4}
+                            b5={b5}
+                            b7={b7}
+                            b8={b8}
+                            a1={a1}
+                            a2={a2}
+                            a3={a3}
+                            a4={a4}
+                            a5={a5}
+                            a6={a6}
+                            a7={a7}
+                            d1={d1}
+                            d2={d2}
+                            d3={d3}
+                            d4={d4}
+                            d5={d5}
+                            d6={d6}
+                            d7={d7}
+                            isSubmitCohen={isSubmitCohen}
+                            handleSubmitCohen={handleSubmitCohen}
+                          />
                         ):(
                           <div style={{display: 'flex'}}>
-                          <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Blood Extraction</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
+                          <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Cohen / HADS Form</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
                           </div>
                         )
                       ):(
-                        data.flow_id === "3" ? (
+                        data.flow_id === "2" ? (
                           data.status === 0 ? (
                             <Grid>
                               <Grid item>
-                                <Typography variant="h6">Submit Urine</Typography>
+                                <Typography variant="h6">Blood Extraction</Typography>
                               </Grid>
                             </Grid>
                           ):(
                             <div style={{display: 'flex'}}>
-                            <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Submit Urine</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
+                            <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Blood Extraction</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
                             </div>
                           )
                         ):(
-                          data.flow_id === "4" ? (
+                          data.flow_id === "3" ? (
                             data.status === 0 ? (
                               <Grid>
                                 <Grid item>
-                                  <Typography variant="h6">Pap Smear</Typography>
+                                  <Typography variant="h6">Submit Urine</Typography>
                                 </Grid>
                               </Grid>
                             ):(
                               <div style={{display: 'flex'}}>
-                              <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Pap Smear</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
+                              <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Submit Urine</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
                               </div>
                             )
                           ):(
-                            data.flow_id === "5" ? (
+                            data.flow_id === "4" ? (
                               data.status === 0 ? (
                                 <Grid>
                                   <Grid item>
-                                    <Typography variant="h6">Eye Test</Typography>
+                                    <Typography variant="h6">Pap Smear</Typography>
                                   </Grid>
                                 </Grid>
                               ):(
                                 <div style={{display: 'flex'}}>
-                                <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Eye Test</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
+                                <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Pap Smear</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
                                 </div>
                               )
                             ):(
-                              data.flow_id === "6" ? (
+                              data.flow_id === "5" ? (
                                 data.status === 0 ? (
                                   <Grid>
                                     <Grid item>
-                                      <Typography variant="h6">ECG</Typography>
+                                      <Typography variant="h6">Eye Test</Typography>
                                     </Grid>
                                   </Grid>
                                 ):(
                                   <div style={{display: 'flex'}}>
-                                  <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">ECG</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
+                                  <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Eye Test</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
                                   </div>
                                 )
                               ):(
-                                data.flow_id === "7" ? (
+                                data.flow_id === "6" ? (
                                   data.status === 0 ? (
                                     <Grid>
                                       <Grid item>
-                                        <Typography variant="h6">Xray</Typography>
+                                        <Typography variant="h6">ECG</Typography>
                                       </Grid>
                                     </Grid>
                                   ):(
                                     <div style={{display: 'flex'}}>
-                                    <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Xray</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
+                                    <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">ECG</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
                                     </div>
                                   )
                                 ):(
-                                  data.flow_id === "8" ? (
-                                    <Grid>
-                                      <Grid item>
-                                        <Typography variant="h6"></Typography>
+                                  data.flow_id === "7" ? (
+                                    data.status === 0 ? (
+                                      <Grid>
+                                        <Grid item>
+                                          <Typography variant="h6">Xray</Typography>
+                                        </Grid>
                                       </Grid>
-                                    </Grid>
+                                    ):(
+                                      <div style={{display: 'flex'}}>
+                                      <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Xray</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
+                                      </div>
+                                    )
                                   ):(
-                                    data.flow_id === "9" ? (
+                                    data.flow_id === "8" ? (
                                       <Grid>
                                         <Grid item>
                                           <Typography variant="h6"></Typography>
                                         </Grid>
                                       </Grid>
                                     ):(
-                                      data.flow_id === "10" ? (
+                                      data.flow_id === "9" ? (
                                         <Grid>
                                           <Grid item>
                                             <Typography variant="h6"></Typography>
                                           </Grid>
                                         </Grid>
                                       ):(
-                                        data.flow_id === "11" ? (
+                                        data.flow_id === "10" ? (
                                           <Grid>
                                             <Grid item>
                                               <Typography variant="h6"></Typography>
                                             </Grid>
                                           </Grid>
                                         ):(
-                                          data.flow_id === "12" ? (
-                                            data.status === 0 ? (
-                                              <Grid>
-                                                <Grid item>
-                                                  <Typography variant="h6">Vital Signs, Height, Weight</Typography>
-                                                </Grid>
+                                          data.flow_id === "11" ? (
+                                            <Grid>
+                                              <Grid item>
+                                                <Typography variant="h6"></Typography>
                                               </Grid>
-                                            ):(
-                                              <div style={{display: 'flex'}}>
-                                              <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Vital Signs, Height, Weight</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
-                                              </div>
-                                            )
+                                            </Grid>
                                           ):(
-                                            data.flow_id === "13" ? (
+                                            data.flow_id === "12" ? (
                                               data.status === 0 ? (
                                                 <Grid>
                                                   <Grid item>
-                                                    <Typography variant="h6">Physical Exam</Typography>
+                                                    <Typography variant="h6">Vital Signs, Height, Weight</Typography>
                                                   </Grid>
                                                 </Grid>
                                               ):(
                                                 <div style={{display: 'flex'}}>
-                                                <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Physical Exam</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
+                                                <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Vital Signs, Height, Weight</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
                                                 </div>
                                               )
                                             ):(
-                                              data.flow_id === "14" ? (
+                                              data.flow_id === "13" ? (
                                                 data.status === 0 ? (
                                                   <Grid>
                                                     <Grid item>
-                                                      <Typography variant="h6">PFT</Typography>
+                                                      <Typography variant="h6">Physical Exam</Typography>
                                                     </Grid>
                                                   </Grid>
                                                 ):(
                                                   <div style={{display: 'flex'}}>
-                                                  <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">PFT</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
+                                                  <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Physical Exam</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
                                                   </div>
                                                 )
                                               ):(
-                                                data.flow_id === "15" ? (
+                                                data.flow_id === "14" ? (
                                                   data.status === 0 ? (
                                                     <Grid>
                                                       <Grid item>
-                                                        <Typography variant="h6">Dental</Typography>
+                                                        <Typography variant="h6">PFT</Typography>
                                                       </Grid>
                                                     </Grid>
                                                   ):(
                                                     <div style={{display: 'flex'}}>
-                                                    <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Dental</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
+                                                    <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">PFT</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
                                                     </div>
                                                   )
                                                 ):(
-                                                  data.flow_id === "16" ? (
-                                                    <Grid>
-                                                      <Grid item>
-                                                        <Typography variant="h6"></Typography>
+                                                  data.flow_id === "15" ? (
+                                                    data.status === 0 ? (
+                                                      <Grid>
+                                                        <Grid item>
+                                                          <Typography variant="h6">Dental</Typography>
+                                                        </Grid>
                                                       </Grid>
-                                                    </Grid>
+                                                    ):(
+                                                      <div style={{display: 'flex'}}>
+                                                      <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Dental</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
+                                                      </div>
+                                                    )
                                                   ):(
-                                                    <></>
+                                                    data.flow_id === "16" ? (
+                                                      <Grid>
+                                                        <Grid item>
+                                                          <Typography variant="h6"></Typography>
+                                                        </Grid>
+                                                      </Grid>
+                                                    ):(
+                                                      <></>
+                                                    )
                                                   )
                                                 )
                                               )
@@ -427,25 +425,26 @@ export default function Index() {
                           )
                         )
                       )
-                    )
-                  ))
-                ):(
-                <Container style={{paddingTop: 44}}>
-                  <Grid>
-                    <Grid item xs={12} sm={12} md={12} lg={12}>
-                      <Typography variant="body1" gutterBottom>To begin, go to Check-in station and present your Employee ID to start your annual physical examination.</Typography>
-                      <Typography variant="body2" color="textSecondary" gutterBottom>We will verify and check-in your account. (We need to make sure that it is you) Then we will assign your APE process flow.</Typography>
+                    ))
+                  ):(
+                  <Container style={{paddingTop: 44}}>
+                    <Grid>
+                      <Grid item xs={12} sm={12} md={12} lg={12}>
+                        <Typography variant="body1" gutterBottom>To begin, go to Check-in station and present your Employee ID to start your annual physical examination.</Typography>
+                        <Typography variant="body2" color="textSecondary" gutterBottom>We will verify and check-in your account. (We need to make sure that it is you) Then we will assign your APE process flow.</Typography>
+                      </Grid>
                     </Grid>
-                  </Grid>
-                </Container>
-                )
-              }
-              <SnackbarCohen
-                openSnackbarCohen={openSnackbarCohen}
-                handleCloseSnackbarCohen={handleCloseSnackbarCohen}
-                message={submitCohenResponse}
-              />
-            </Fragment>
+                  </Container>
+                  )
+                }
+                <SnackbarCohen
+                  openSnackbarCohen={openSnackbarCohen}
+                  handleCloseSnackbarCohen={handleCloseSnackbarCohen}
+                  message={submitCohenResponse}
+                />
+              </Fragment>
+            )
+            
           )
         }
       </Box>
