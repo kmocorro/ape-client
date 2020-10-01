@@ -19,19 +19,17 @@ import { useRouter } from 'next/router'
 export default function Index() {
   
   const router = useRouter()
-  
-  const token = cookies.get('token')
+  const [ token, setToken ] = useState(cookies.get('token'))
   const fetch_employee = url => fetch(url, {headers: { 'Content-Type': 'application/json', 'Authorization': token}, method: 'POST'}).then(r => r.json())
-  const { data, error } = useSWR('http://meswebspf409.sunpowercorp.com:8080/api/employee', fetch_employee)
+  const { data, error, isValidating } = useSWR('http://meswebspf409.sunpowercorp.com:8080/api/employee', fetch_employee)
   console.log(data);
 
   const handleLogin = () => {
     router.push('/login');
   }
   const handleLogout = () => {
-    cookies.remove('token', { path: '/' });
-    console.log(token);
-    router.push('/login');
+    cookies.remove('token', { path: '/' })
+    setToken('');
   }
   
   /*
@@ -157,27 +155,77 @@ export default function Index() {
   }
 
   const [ countComplete, setCountComplete ] = useState(0);
+  /*
 
   useEffect(() => {
-    if(typeof data !== 'undefined'){
-      setCountComplete(data.flow.reduce(function(n, flow){
-        return n + (flow.status === 1);
-      }, 0))
-    } else {
+    if(isValidating){
       setCountComplete(0) 
+    } else {
+      if(typeof data !== 'undefined' && data.flow !== null){
+        setCountComplete(data.flow.reduce(function(n, flow){
+          return n + (flow.status === 1);
+        }, 0))
+      }
     }
   }, [data])
 
-  if(!data) return <div>Loading...</div>
-  if(error) return <div>Error loading. Please Login again.</div>
+*/
+  
+  if(!data){
+    return (
+      <Container maxWidth="sm">
+        <Box my={4}>
+          <Typography variant="h3" component="h6" style={{fontWeight: 'bold'}} gutterBottom>
+            maxeon ape +
+          </Typography>
+          <Typography>Loading...</Typography>
+        </Box>
+      </Container>
+    )
+  }
+  
+  if(data.code === 0){
+    return (
+      <Container maxWidth="sm">
+        <Box my={4}>
+          <Typography variant="h3" component="h6" style={{fontWeight: 'bold'}} gutterBottom>
+            maxeon ape +
+          </Typography>
+          <Typography>You are signed out. Please login.</Typography>
+          <Button onClick={handleLogin} variant="default" size="small">
+            Login
+          </Button>
+        </Box>
+      </Container>
+    )
+  }
+
+  if(error){
+    return (
+      <Container maxWidth="sm">
+        <Box my={4}>
+          <Typography variant="h3" component="h6" style={{fontWeight: 'bold'}} gutterBottom>
+            maxeon ape +
+          </Typography>
+          <Typography>Error loading. Please login.</Typography>
+          <Button onClick={handleLogin} variant="default" size="small">
+            Login
+          </Button>
+        </Box>
+      </Container>
+    )
+  }
 
   return (
     <Container maxWidth="sm">
       <Box my={4}>
         {
-          !token || error ? (
+          !token ? (
             <>
-            <Typography variant="h4" component="h1" gutterBottom>
+            <Typography variant="h3" component="h6" style={{fontWeight: 'bold'}} gutterBottom>
+              maxeon ape +
+            </Typography>
+            <Typography variant="h6" component="h6" style={{fontWeight: 'bold'}} gutterBottom>
               Please Login.
             </Typography>
             <Button onClick={handleLogin} variant="outlined">
@@ -186,7 +234,16 @@ export default function Index() {
             </>
           ):(
             !data ? (
-              <Typography>Loading...</Typography>
+              data.code === 0 ? (
+                <>
+                <Typography>You are signed out.</Typography>
+                <Button onClick={handleLogin} variant="default" size="small">
+                  Login
+                </Button>
+                </>
+              ):( 
+                <Typography>Loading...</Typography>
+              )
             ):(
               <Fragment>
                 <Typography variant="h3" component="h6" style={{fontWeight: 'bold'}} gutterBottom>

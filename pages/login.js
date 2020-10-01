@@ -15,9 +15,9 @@ export default function Index() {
   const [ loginResponse, setLoginResponse ] = useState('');
 
   if(token.token){
-    cookies.set('token', token.token);
+    cookies.set('token', token.token, {path: '/'});
   } else {
-    cookies.set('token', '');
+    cookies.set('token', '', {path: '/'});
   }
 
   console.log(token)
