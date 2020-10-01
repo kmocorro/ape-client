@@ -168,6 +168,9 @@ export default function Index() {
     }
   }, [data])
 
+  if(!data) return <div>Loading...</div>
+  if(error) return <div>Error loading. Please Login again.</div>
+
   return (
     <Container maxWidth="sm">
       <Box my={4}>
