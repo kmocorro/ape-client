@@ -20,7 +20,7 @@ export default function Index() {
     cookies.set('token', '', {path: '/'});
   }
 
-  console.log(token)
+  //console.log(token)
 
   const username = useLogin('');
   const password = useLogin('');
@@ -41,7 +41,7 @@ export default function Index() {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     //headers.append('Authorization', '123456789');
-    console.log('logging in..')
+   // console.log('logging in..')
     let response = await fetch('http://meswebspf409.sunpowercorp.com:8080/api/login', {
       headers: headers,
       method: 'POST',

@@ -16,20 +16,25 @@ import Cohen from '../components/Cohen'
 import SnackbarCohen from '../components/SnackbarCohen'
 import { useRouter } from 'next/router'
 
+function EmployeeProfile() {
+}
+
 export default function Index() {
   
   const router = useRouter()
-  const [ token, setToken ] = useState(cookies.get('token'))
-  const fetch_employee = url => fetch(url, {headers: { 'Content-Type': 'application/json', 'Authorization': token}, method: 'POST'}).then(r => r.json())
-  const { data, error, isValidating } = useSWR('http://meswebspf409.sunpowercorp.com:8080/api/employee', fetch_employee)
-  console.log(data);
+
+  const [token, setToken] = useState(cookies.get('token'))
+
+  const fetcher = url => fetch(url, {headers: { 'Content-Type': 'application/json', 'Authorization': token}, method: 'POST'}).then(r => r.json())
+
+  const { data, error } = useSWR('http://meswebspf409.sunpowercorp.com:8080/api/employee', fetcher)
 
   const handleLogin = () => {
     router.push('/login');
   }
   const handleLogout = () => {
     cookies.remove('token', { path: '/' })
-    setToken('');
+    setToken('')
   }
   
   /*
@@ -153,99 +158,16 @@ export default function Index() {
     }
     setOpenSnackbarCohen(false);
   }
-
-  const [ countComplete, setCountComplete ] = useState(0);
-  /*
-
-  useEffect(() => {
-    if(isValidating){
-      setCountComplete(0) 
-    } else {
-      if(typeof data !== 'undefined' && data.flow !== null){
-        setCountComplete(data.flow.reduce(function(n, flow){
-          return n + (flow.status === 1);
-        }, 0))
-      }
-    }
-  }, [data])
-
-*/
   
-  if(!data){
-    return (
-      <Container maxWidth="sm">
-        <Box my={4}>
-          <Typography variant="h3" component="h6" style={{fontWeight: 'bold'}} gutterBottom>
-            maxeon ape +
-          </Typography>
-          <Typography>Loading...</Typography>
-        </Box>
-      </Container>
-    )
-  }
-  
-  if(data.code === 0){
-    return (
-      <Container maxWidth="sm">
-        <Box my={4}>
-          <Typography variant="h3" component="h6" style={{fontWeight: 'bold'}} gutterBottom>
-            maxeon ape +
-          </Typography>
-          <Typography>You are signed out. Please login.</Typography>
-          <Button onClick={handleLogin} variant="default" size="small">
-            Login
-          </Button>
-        </Box>
-      </Container>
-    )
-  }
 
-  if(error){
-    return (
-      <Container maxWidth="sm">
-        <Box my={4}>
-          <Typography variant="h3" component="h6" style={{fontWeight: 'bold'}} gutterBottom>
-            maxeon ape +
-          </Typography>
-          <Typography>Error loading. Please login.</Typography>
-          <Button onClick={handleLogin} variant="default" size="small">
-            Login
-          </Button>
-        </Box>
-      </Container>
-    )
-  }
+  if(error) return <div>failed to load.</div>
+  if(!token) return <div>Please scan QR code and login. or <Link href="/login" style={{color:"blue"}}>go to login</Link></div>
+  if(!data) return <div>loading...</div>
 
   return (
     <Container maxWidth="sm">
       <Box my={4}>
-        {
-          !token ? (
-            <>
-            <Typography variant="h3" component="h6" style={{fontWeight: 'bold'}} gutterBottom>
-              maxeon ape +
-            </Typography>
-            <Typography variant="h6" component="h6" style={{fontWeight: 'bold'}} gutterBottom>
-              Please Login.
-            </Typography>
-            <Button onClick={handleLogin} variant="outlined">
-              Login
-            </Button>
-            </>
-          ):(
-            !data ? (
-              data.code === 0 ? (
-                <>
-                <Typography>You are signed out.</Typography>
-                <Button onClick={handleLogin} variant="default" size="small">
-                  Login
-                </Button>
-                </>
-              ):( 
-                <Typography>Loading...</Typography>
-              )
-            ):(
-              <Fragment>
+            <Fragment>
                 <Typography variant="h3" component="h6" style={{fontWeight: 'bold'}} gutterBottom>
                   maxeon ape +
                 </Typography>
@@ -261,9 +183,6 @@ export default function Index() {
                 <Button size="small" onClick={handleLogout} variant="text">
                   logout
                 </Button>
-                <Typography variant="body1" style={{marginTop:24, marginBottom:24}} gutterBottom>
-                  {countComplete}/{data.flow.length} quests complete
-                </Typography>
                 {
                   data.flow.length > 0 ? (
                     data.flow.map(data => (
@@ -503,10 +422,6 @@ export default function Index() {
                   message={submitCohenResponse}
                 />
               </Fragment>
-            )
-            
-          )
-        }
       </Box>
     </Container>
   );
