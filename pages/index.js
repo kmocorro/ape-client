@@ -149,6 +149,9 @@ export default function Index() {
       setToggle_cohen(false)
       setSubmitCohenResponse(await response.json())
       setOpenSnackbarCohen(true)
+      
+      router.reload();
+      
     }
   }
 
@@ -188,37 +191,14 @@ export default function Index() {
                     data.flow.map(data => (
                       data.flow_id === "1" ? (
                         data.status === 0 ? (
-                          <Cohen
-                            b1={b1}
-                            b2={b2}
-                            b3={b3}
-                            b6={b6}
-                            b9={b9}
-                            b10={b10}
-                            b4={b4}
-                            b5={b5}
-                            b7={b7}
-                            b8={b8}
-                            a1={a1}
-                            a2={a2}
-                            a3={a3}
-                            a4={a4}
-                            a5={a5}
-                            a6={a6}
-                            a7={a7}
-                            d1={d1}
-                            d2={d2}
-                            d3={d3}
-                            d4={d4}
-                            d5={d5}
-                            d6={d6}
-                            d7={d7}
-                            isSubmitCohen={isSubmitCohen}
-                            handleSubmitCohen={handleSubmitCohen}
-                          />
+                          <Grid>
+                            <Grid item>
+                              <Typography variant="h6">Urinalysis</Typography>
+                            </Grid>
+                          </Grid>
                         ):(
                           <div style={{display: 'flex'}}>
-                          <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Cohen / HADS Form</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
+                          <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Urinalysis</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
                           </div>
                         )
                       ):(
@@ -226,12 +206,12 @@ export default function Index() {
                           data.status === 0 ? (
                             <Grid>
                               <Grid item>
-                                <Typography variant="h6">Blood Extraction</Typography>
+                                <Typography variant="h6">CBC</Typography>
                               </Grid>
                             </Grid>
                           ):(
                             <div style={{display: 'flex'}}>
-                            <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Blood Extraction</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
+                            <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">CBC</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
                             </div>
                           )
                         ):(
@@ -239,12 +219,12 @@ export default function Index() {
                             data.status === 0 ? (
                               <Grid>
                                 <Grid item>
-                                  <Typography variant="h6">Submit Urine</Typography>
+                                  <Typography variant="h6">Liver Function Test</Typography>
                                 </Grid>
                               </Grid>
                             ):(
                               <div style={{display: 'flex'}}>
-                              <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Submit Urine</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
+                              <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Liver Function Test</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
                               </div>
                             )
                           ):(
@@ -252,12 +232,12 @@ export default function Index() {
                               data.status === 0 ? (
                                 <Grid>
                                   <Grid item>
-                                    <Typography variant="h6">Pap Smear</Typography>
+                                    <Typography variant="h6">Eye Test</Typography>
                                   </Grid>
                                 </Grid>
                               ):(
                                 <div style={{display: 'flex'}}>
-                                <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Pap Smear</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
+                                <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Eye Test</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
                                 </div>
                               )
                             ):(
@@ -265,12 +245,12 @@ export default function Index() {
                                 data.status === 0 ? (
                                   <Grid>
                                     <Grid item>
-                                      <Typography variant="h6">Eye Test</Typography>
+                                      <Typography variant="h6">ECG</Typography>
                                     </Grid>
                                   </Grid>
                                 ):(
                                   <div style={{display: 'flex'}}>
-                                  <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Eye Test</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
+                                  <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">ECG</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
                                   </div>
                                 )
                               ):(
@@ -278,12 +258,12 @@ export default function Index() {
                                   data.status === 0 ? (
                                     <Grid>
                                       <Grid item>
-                                        <Typography variant="h6">ECG</Typography>
+                                        <Typography variant="h6">Ultrasound</Typography>
                                       </Grid>
                                     </Grid>
                                   ):(
                                     <div style={{display: 'flex'}}>
-                                    <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">ECG</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
+                                    <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Ultrasound</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
                                     </div>
                                   )
                                 ):(
@@ -291,21 +271,50 @@ export default function Index() {
                                     data.status === 0 ? (
                                       <Grid>
                                         <Grid item>
-                                          <Typography variant="h6">Xray</Typography>
+                                          <Typography variant="h6">Chest Xray</Typography>
                                         </Grid>
                                       </Grid>
                                     ):(
                                       <div style={{display: 'flex'}}>
-                                      <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Xray</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
+                                      <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Chest Xray</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
                                       </div>
                                     )
                                   ):(
                                     data.flow_id === "8" ? (
-                                      <Grid>
-                                        <Grid item>
-                                          <Typography variant="h6"></Typography>
-                                        </Grid>
-                                      </Grid>
+                                      data.status === 0 ? (
+                                        <Cohen
+                                          b1={b1}
+                                          b2={b2}
+                                          b3={b3}
+                                          b6={b6}
+                                          b9={b9}
+                                          b10={b10}
+                                          b4={b4}
+                                          b5={b5}
+                                          b7={b7}
+                                          b8={b8}
+                                          a1={a1}
+                                          a2={a2}
+                                          a3={a3}
+                                          a4={a4}
+                                          a5={a5}
+                                          a6={a6}
+                                          a7={a7}
+                                          d1={d1}
+                                          d2={d2}
+                                          d3={d3}
+                                          d4={d4}
+                                          d5={d5}
+                                          d6={d6}
+                                          d7={d7}
+                                          isSubmitCohen={isSubmitCohen}
+                                          handleSubmitCohen={handleSubmitCohen}
+                                        />
+                                      ):(
+                                        <div style={{display: 'flex'}}>
+                                        <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Cohen / HADS Form</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
+                                        </div>
+                                      )
                                     ):(
                                       data.flow_id === "9" ? (
                                         <Grid>
