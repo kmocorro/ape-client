@@ -317,36 +317,54 @@ export default function Index() {
                                       )
                                     ):(
                                       data.flow_id === "9" ? (
-                                        <Grid>
-                                          <Grid item>
-                                            <Typography variant="h6"></Typography>
-                                          </Grid>
-                                        </Grid>
-                                      ):(
-                                        data.flow_id === "10" ? (
+                                        data.status === 0 ? (
                                           <Grid>
                                             <Grid item>
-                                              <Typography variant="h6"></Typography>
+                                              <Typography variant="h6">Vital Signs Monitoring</Typography>
                                             </Grid>
                                           </Grid>
                                         ):(
-                                          data.flow_id === "11" ? (
+                                          <div style={{display: 'flex'}}>
+                                          <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Vital Signs Monitoring</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
+                                          </div>
+                                        )
+                                      ):(
+                                        data.flow_id === "10" ? (
+                                          data.status === 0 ? (
                                             <Grid>
                                               <Grid item>
-                                                <Typography variant="h6"></Typography>
+                                                <Typography variant="h6">Physical Examination</Typography>
                                               </Grid>
                                             </Grid>
+                                          ):(
+                                            <div style={{display: 'flex'}}>
+                                            <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Physical Examination</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
+                                            </div>
+                                          )
+                                        ):(
+                                          data.flow_id === "11" ? (
+                                            data.status === 0 ? (
+                                              <Grid>
+                                                <Grid item>
+                                                  <Typography variant="h6">Pulmonary Function Test</Typography>
+                                                </Grid>
+                                              </Grid>
+                                            ):(
+                                              <div style={{display: 'flex'}}>
+                                              <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Pulmonary Function Test</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
+                                              </div>
+                                            )
                                           ):(
                                             data.flow_id === "12" ? (
                                               data.status === 0 ? (
                                                 <Grid>
                                                   <Grid item>
-                                                    <Typography variant="h6">Vital Signs, Height, Weight</Typography>
+                                                    <Typography variant="h6">Papsmear</Typography>
                                                   </Grid>
                                                 </Grid>
                                               ):(
                                                 <div style={{display: 'flex'}}>
-                                                <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Vital Signs, Height, Weight</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
+                                                <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Papsmear</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
                                                 </div>
                                               )
                                             ):(
@@ -354,12 +372,12 @@ export default function Index() {
                                                 data.status === 0 ? (
                                                   <Grid>
                                                     <Grid item>
-                                                      <Typography variant="h6">Physical Exam</Typography>
+                                                      <Typography variant="h6">Dental Examination</Typography>
                                                     </Grid>
                                                   </Grid>
                                                 ):(
                                                   <div style={{display: 'flex'}}>
-                                                  <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Physical Exam</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
+                                                  <Typography variant="h6" style={{textDecorationLine: 'line-through', textDecorationStyle: 'solid'}} color="textSecondary">Dental Examination</Typography><Typography style={{lineHeight: 2, marginLeft: 8, color:'lime'}}>Complete!</Typography>
                                                   </div>
                                                 )
                                               ):(
