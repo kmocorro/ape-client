@@ -27,7 +27,7 @@ export default function Index() {
 
   const fetcher = url => fetch(url, {headers: { 'Content-Type': 'application/json', 'Authorization': token}, method: 'POST'}).then(r => r.json())
 
-  const { data, error } = useSWR('http://meswebspf409.sunpowercorp.com:8080/api/employee', fetcher)
+  const { data, error } = useSWR('http://meswebspf409.maxeoncorp.com:7001/api/employee', fetcher)
 
   const handleLogin = () => {
     router.push('/login');
@@ -43,7 +43,7 @@ export default function Index() {
     cohen();
 
     async function cohen(){
-      let response = await fetch('http://meswebspf409.sunpowercorp.com:8080/api/iscohen', {
+      let response = await fetch('http://meswebspf409.maxeoncorp.com:7001/api/iscohen', {
         headers: { 'Content-Type': 'application/json', 'Authorization': token},
         method: 'POST'
       })
@@ -113,7 +113,7 @@ export default function Index() {
     headers.append('Content-Type', 'application/json');
     //headers.append('Authorization', isToken);
 
-    let response = await fetch('http://meswebspf409.sunpowercorp.com:8080/api/cohen', {
+    let response = await fetch('http://meswebspf409.maxeoncorp.com:7001/api/cohen', {
       headers: headers,
       method: 'POST',
       body: JSON.stringify({
